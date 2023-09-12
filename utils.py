@@ -96,9 +96,11 @@ def choice_while_answering(user_ans, correct_ans):
     elif user_ans == "q":
         return False
     else:
-        if string_similarity(user_ans, correct_ans) >= 0.8:
-            return True
-        else:
+        ifany = 0
+        for option in correct_ans.split("/"):
+            if string_similarity(user_ans, option.strip()) >= 0.8:
+                ifany += 1
+        if ifany == 0:
             input("Incorrect!, Correct answer: {}".format(correct_ans))
             return False
 

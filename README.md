@@ -8,6 +8,7 @@
 - The only requirement is that the first line of the file is the header (with two cols)
 - You can have as many datafiles as you want, save them in the data folder
 - eg: Dutch word, English word
+- If you want multiple options, just separate them using "/". eg: okay,ok/alright
 ### Running the script
 - To run the script, you need to have python installed. Then, you can run the script with the following command:
 ```bash
@@ -30,4 +31,5 @@ python3 main.py --file "data/somefile.csv"
 - [x] Timer
 - [x] Statistics
 - [x] Save/Restore previous session
-- [x] Show incorrect answers at the end
+- [x] Show incorrect answers at the end for the session
+- [x] Option to have multiple possible answers
