@@ -76,6 +76,9 @@ class Session:
             print("Corrects: {}".format(sum(self.num_corrects)))
             print("Incorrects: {}".format(sum(self.num_incorrects)))
         print("Time taken: {}".format(self.time_taken))
+        print("Incorrects:")
+        for k,v in self.dict_wrongs.items():
+            print(k,' -> ', v)
 
 
 def string_similarity(str1, str2):
@@ -135,6 +138,7 @@ def print_questions(session):
 
     # Start timer
     start_time = time.time()
+    dict_wrongs = {}
 
     # Print questions
     for i in tqdm(indexes):
@@ -144,18 +148,21 @@ def print_questions(session):
                 session.num_corrects_r[i] += 1
             else:
                 session.num_incorrects_r[i] += 1
+                dict_wrongs[session.list_B[i]] = session.list_A[i]
         else:
             user_ans = input("{} : ".format(session.list_A[i]))
             if choice_while_answering(user_ans, session.list_B[i]):
                 session.num_corrects[i] += 1
             else:
                 session.num_incorrects[i] += 1
+                dict_wrongs[session.list_A[i]] = session.list_B[i]
 
         # Clear screen
         os.system("cls" if os.name == "nt" else "clear")
     # End timer and save time taken
     end_time = time.time()
     session.time_taken = end_time - start_time
+    session.dict_wrongs = dict_wrongs
 
 
 def setup_session(args):
@@ -181,7 +188,7 @@ def setup_session(args):
     if os.path.isfile("./data/session.pkl"):
         resume = input("Resume previous session? (y/n): ")
         # Load previous session
-        if resume == "y":
+        if resume == "y" or None:
             session.restore_session()
             session.resume = True
             print("Resuming previous session.")

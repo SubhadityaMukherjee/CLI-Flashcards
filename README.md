@@ -30,3 +30,4 @@ python3 main.py --file "data/somefile.csv"
 - [x] Timer
 - [x] Statistics
 - [x] Save/Restore previous session
+- [x] Show incorrect answers at the end
